@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Party Tricks</string>
+    <string name="button_start">Start</string>
+    <string name="button_connect">connect</string>
+    <string name="button_exit">Exit!</string>
+    <string name="button_gun">Bang!</string>
+    <string name="button_soda">Soda!</string>
+    <string name="button_magic">Magic</string>
+    <string name="button_return">Return</string>
+</resources>

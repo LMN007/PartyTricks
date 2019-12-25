@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn00"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="5dp"
+        android:text="连接设备"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        tools:context=".MainActivity">
+        <Button
+            android:id="@+id/btn01"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="5dp"
+            android:text="@string/button_gun"/>
+
+        <Button
+            android:id="@+id/btn02"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:text="@string/button_soda"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        tools:context=".MainActivity">
+        <Button
+            android:id="@+id/btn03"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="5dp"
+            android:text="@string/button_magic"/>
+
+        <Button
+            android:id="@+id/btn04"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:text="@string/button_return"/>
+    </LinearLayout>
+</LinearLayout>

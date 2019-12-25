@@ -34,7 +34,6 @@ public class MyBox2dActivity extends Activity
     //物体列表
     ArrayList<MyBody> bl=new ArrayList<MyBody>();
     public Bitmap water;//水图片
-   
     public void onCreate(Bundle savedInstanceState) 
     {   
         super.onCreate(savedInstanceState);   

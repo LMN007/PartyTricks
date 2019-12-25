@@ -9,4 +9,12 @@ public class Constant {
     public static final String DEVICE_NAME = "device_name";
 
     public static final int REQUEST_CODE=1;//requestCode标识
+
+    public enum SodaState{
+        SODA_ACCEPTING,
+        SODA_SENDING,
+        SODA_IN,
+        SODA_OUT,
+        SODA_BREAK,
+    }
 }

@@ -1,24 +1,19 @@
 package com.example.partytricks;
 
 import android.app.Application;
-import android.app.Service;
 import android.bluetooth.BluetoothSocket;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.IBinder;
-import android.renderscript.ScriptGroup;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.Socket;
+
 
 public class ServiceOnBack extends Application {
     private BluetoothSocket socket;
     private InputStream inputStream;
     private OutputStream outputStream;
+    private Constant.SodaState sodaState = Constant.SodaState.SODA_OUT;
 
     public void rmSocket(){
         try {
@@ -36,7 +31,7 @@ public class ServiceOnBack extends Application {
             outputStream = socket.getOutputStream();
         }catch(Exception e){e.printStackTrace();}
     }
-    public void sendMessage(byte[] buffer){
+    public synchronized void sendMessage(byte[] buffer){
         if(outputStream!=null){
             try {
                 outputStream.write(buffer);
@@ -48,4 +43,8 @@ public class ServiceOnBack extends Application {
             Toast.makeText(getApplicationContext(), "there is no back connection", Toast.LENGTH_SHORT).show();
         }
     }
+    public synchronized void setSodaState(Constant.SodaState state){
+        this.sodaState = state;
+    }
+    public Constant.SodaState getSodaState(){return this.sodaState;}
 }

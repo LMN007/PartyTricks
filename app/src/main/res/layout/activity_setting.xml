@@ -58,4 +58,10 @@
             android:layout_height="60dp"
             android:text="@string/button_return"/>
     </LinearLayout>
+    <Button
+        android:id="@+id/debugButton"
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="debugAnimation"/>
 </LinearLayout>

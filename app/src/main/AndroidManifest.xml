@@ -18,6 +18,7 @@
         <activity android:name=".GunActivity" />
         <activity android:name=".SodaActivity" />
         <activity android:name=".SettingActivity"/>
+        <activity android:name=".box2d.wavemakingmachine.MyBox2dActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

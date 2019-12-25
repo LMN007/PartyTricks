@@ -1,11 +1,12 @@
 package com.example.partytricks;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.partytricks.box2d.wavemakingmachine.MyBox2dActivity;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -52,6 +53,14 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(SettingActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button debugBt = (Button)findViewById(R.id.debugButton);
+        debugBt.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(SettingActivity.this,MyBox2dActivity.class);
                 startActivity(intent);
             }
         });

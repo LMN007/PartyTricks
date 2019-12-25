@@ -25,10 +25,10 @@ import java.util.Random;
 
 public class SodaActivity extends AppCompatActivity {
 
-    private SensorManager mysm, mysmGrav;
+    private SensorManager mysm;
     private AudioManager amgr;
     private Sensor myS;
-    private Sensor mySGrav;
+    //private Sensor mySGrav;
     private Button btn_return;
     private ImageView mImageView;
     private TextView tv1, tv2, tv3, tv4;
@@ -46,7 +46,7 @@ public class SodaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_soda);
         mImageView = findViewById(R.id.soda_glass);
         mysm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        //myS = mysm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        myS = mysm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         //mySGrav = mysmGrav.getDefaultSensor(Sensor.TYPE_GRAVITY);
         tv1 = findViewById(R.id.tv1);
         tv2 = findViewById(R.id.tv2);
@@ -59,7 +59,7 @@ public class SodaActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(SodaActivity.this,SettingActivity.class);
                 startActivity(intent);
-                mMediaPlayer.stop();
+                //mMediaPlayer.stop();
             }
         });
         full = create_Random();
@@ -89,11 +89,6 @@ public class SodaActivity extends AppCompatActivity {
             tv2.setText("Y轴加速度" + value[1]);
             tv3.setText("Z轴加速度" + value[2]);
             tv4.setText("count" + count);
-            if(flagPass){
-                count = 500;
-                full = 600;
-                flagPass = false;
-            }
             if((value[1] > 8 || value[1] < -8) && !flagFull){
                 count ++;
                 playSound(1,0);

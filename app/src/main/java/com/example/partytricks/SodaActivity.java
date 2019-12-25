@@ -39,15 +39,15 @@ public class SodaActivity extends AppCompatActivity {
     private int full;
     private int current = 0;
     private boolean flagFull = false;
-    private boolean flagPass = true;
+    private boolean flagPass = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soda);
         mImageView = findViewById(R.id.soda_glass);
         mysm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        myS = mysm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-        mySGrav = mysmGrav.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        //myS = mysm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        //mySGrav = mysmGrav.getDefaultSensor(Sensor.TYPE_GRAVITY);
         tv1 = findViewById(R.id.tv1);
         tv2 = findViewById(R.id.tv2);
         tv3 = findViewById(R.id.tv3);

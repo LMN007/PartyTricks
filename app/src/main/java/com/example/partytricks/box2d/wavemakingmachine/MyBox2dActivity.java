@@ -35,8 +35,8 @@ public class MyBox2dActivity extends Activity
     ArrayList<MyBody> bl=new ArrayList<MyBody>();
     public Bitmap water;//水图片
     public void onCreate(Bundle savedInstanceState) 
-    {   
-        super.onCreate(savedInstanceState);   
+    {
+        super.onCreate(savedInstanceState);
         //设置为全屏
         requestWindowFeature(Window.FEATURE_NO_TITLE);   
         getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,   

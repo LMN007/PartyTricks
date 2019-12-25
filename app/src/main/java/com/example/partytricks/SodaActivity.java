@@ -29,6 +29,7 @@ public class SodaActivity extends AppCompatActivity {
     private AudioManager amgr;
     private Sensor myS;
     //private Sensor mySGrav;
+    private Vibrator vibrator;
     private Button btn_return;
     private ImageView mImageView;
     private TextView tv1, tv2, tv3, tv4;
@@ -40,11 +41,13 @@ public class SodaActivity extends AppCompatActivity {
     private int current = 0;
     private boolean flagFull = false;
     private boolean flagPass = false;//test git
+    private boolean flagShake = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soda);
         mImageView = findViewById(R.id.soda_glass);
+        vibrator=(Vibrator)getSystemService(Service.VIBRATOR_SERVICE);
         mysm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         myS = mysm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         //mySGrav = mysmGrav.getDefaultSensor(Sensor.TYPE_GRAVITY);
@@ -92,8 +95,15 @@ public class SodaActivity extends AppCompatActivity {
             if((value[1] > 8 || value[1] < -8) && !flagFull){
                 count ++;
                 playSound(1,0);
-                Vibrator vibrator=(Vibrator)getSystemService(Service.VIBRATOR_SERVICE);
-                vibrator.vibrate(new long[]{10,1,10,count}, -1);
+                if(flagShake){
+                    vibrator.vibrate(new long[]{0,0,10,5000}, -1);
+                    flagShake = false;
+                }
+
+            }
+            else{
+                vibrator.cancel();
+                flagShake = true;
             }
             if(count > full){
                 //mImageView.setBackground(getResources().getDrawable(R.raw.dd));

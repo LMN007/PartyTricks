@@ -39,7 +39,7 @@ public class SodaActivity extends AppCompatActivity {
     private int full;
     private int current = 0;
     private boolean flagFull = false;
-    private boolean flagPass = false;
+    private boolean flagPass = false;//test git
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

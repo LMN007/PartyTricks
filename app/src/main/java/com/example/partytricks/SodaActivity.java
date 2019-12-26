@@ -3,8 +3,10 @@ package com.example.partytricks;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -20,11 +22,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Random;
 
 public class SodaActivity extends AppCompatActivity {
+    public static final String RESPONSE_STRING = "soda_is_accepting";
+    private SodaReceiver sodaReceiver;
 
     private SensorManager mysm;
     private AudioManager amgr;
@@ -48,6 +53,12 @@ public class SodaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soda);
+
+        IntentFilter filter = new IntentFilter(SodaReceiver.SODA_ACCEPT_RESPONSE);
+        sodaReceiver = new SodaReceiver();
+        registerReceiver(sodaReceiver,filter);
+
+        //UI
         mImageView = findViewById(R.id.soda_glass);
         vibrator=(Vibrator)getSystemService(Service.VIBRATOR_SERVICE);
         mysm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -181,21 +192,23 @@ public class SodaActivity extends AppCompatActivity {
         count = 0;
         return message;
     }
-    private void receiveMessage(){
-        String message = "500/600";
+    private void receiveMessage(String str){
+        String message = str;
+        if(message==null){
+            Toast.makeText(SodaActivity.this, "null message accepted", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String[] splitMessage=message.split("/");
         int receive_current = Integer.parseInt(splitMessage[0]);
         int receive_full = Integer.parseInt(splitMessage[1]);
-        for(int i = current; i < receive_current; i+=10){
 //            try {
 //                Thread.sleep(5 * 10); //设置暂停的时间 5 秒
 //                //current = i;
-            count = i;
+        count = receive_current;
 //                tv4.setText("count" + count);
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
-        }
         current = receive_current;
         full = receive_full;
     }
@@ -222,5 +235,15 @@ public class SodaActivity extends AppCompatActivity {
         }
         return true;
         //return super.onKeyDown(keyCode, event);
+    }
+    public class SodaReceiver extends BroadcastReceiver{
+        public static final String SODA_ACCEPT_RESPONSE = "action.PROCESS_RESPONSE";
+        @Override
+        public void onReceive(Context context, Intent intent){
+            String responseString = intent.getStringExtra(SodaActivity.RESPONSE_STRING);
+            if(responseString!=null){
+                receiveMessage(responseString);
+            }
+        }
     }
 }

@@ -105,6 +105,12 @@ public class SettingBluetoothActivity extends Activity{
                     byte[] readBuf = (byte[]) msg.obj;
                     // 创建接收的信息的字符串
                     String readMessage = new String(readBuf, 0, msg.arg1);//用系统默认的字符集把字节数组的一个序列转换为字符串
+                    //send Broadcast
+                    Intent broadcastIntent = new Intent();
+                    broadcastIntent.setAction(SodaActivity.SodaReceiver.SODA_ACCEPT_RESPONSE);
+                    broadcastIntent.putExtra(SodaActivity.RESPONSE_STRING,readMessage);
+                    sendBroadcast(broadcastIntent);
+
                     Toast.makeText(getApplicationContext(),
                             connectedNameStr + ":  " + readMessage,
                             Toast.LENGTH_LONG).show();//显示从哪个设备接收的什么样的字符串

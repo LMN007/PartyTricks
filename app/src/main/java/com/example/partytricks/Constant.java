@@ -12,8 +12,6 @@ public class Constant {
 
     public static float accelerateX = 0.0f;
     public static float accelerateY = 10.0f;
-    public static float velocityX = 0.0f;
-    public static float velocityY = 0.0f;
 
     private static SodaState SODA_STATE = SodaState.SODA_OUT;
 

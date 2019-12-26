@@ -35,11 +35,11 @@ public class PhysicsThread extends Thread
                         float vx=0.0f;
                         float vy=0.0f;
                         Vec2 vec = particalVecBuff[i];
-                        if(Math.abs(vec.x+velocityX)<100){
-                            vx=vec.x+(-velocityX);
+                        if(Math.abs(vec.x+accelerateX*6)<100){
+                            vx=vec.x+(-accelerateX*6);
                         }
-                        if(Math.abs(vec.y+velocityY)<100){
-                            vy=vec.y+velocityY;
+                        if(Math.abs(vec.y+accelerateY*6)<100){
+                            vy=vec.y+accelerateY*6;
                         }
                         particalVecBuff[i] = new Vec2(vx,vy);
                     }

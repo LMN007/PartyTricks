@@ -92,9 +92,11 @@ public class SodaActivity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             float[] value = event.values;
-//            tv1.setText("X轴加速度" + value[0]);
-//            tv2.setText("Y轴加速度" + value[1]);
-//            tv3.setText("Z轴加速度" + value[2]);
+            Constant.accelerateX = value[0];
+            Constant.accelerateY = value[1];
+            tv1.setText("X轴加速度" + value[0]);
+            tv2.setText("Y轴加速度" + value[1]);
+            tv3.setText("Z轴加速度" + value[2]);
             tv4.setText("count" + count);
             if((value[1] > 8 || value[1] < -8) && !flagFull){
                 count ++;
@@ -125,9 +127,9 @@ public class SodaActivity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             float[] value = event.values;
-            tv1.setText("X轴加速度" + value[0]);
-            tv2.setText("Y轴加速度" + value[1]);
-            tv3.setText("Z轴加速度" + value[2]);
+//            tv1.setText("X轴加速度" + value[0]);
+//            tv2.setText("Y轴加速度" + value[1]);
+//            tv3.setText("Z轴加速度" + value[2]);
             if((value[1] < -9) && !flagFull && flagKeyDown){
                 String message = sendMessage();
                 //send

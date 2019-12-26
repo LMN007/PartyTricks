@@ -111,9 +111,10 @@ public class SettingBluetoothActivity extends Activity{
                     broadcastIntent.putExtra(SodaActivity.RESPONSE_STRING,readMessage);
                     sendBroadcast(broadcastIntent);
 
-                    Toast.makeText(getApplicationContext(),
-                            connectedNameStr + ":  " + readMessage,
-                            Toast.LENGTH_LONG).show();//显示从哪个设备接收的什么样的字符串
+//                    Toast.makeText(getApplicationContext(),
+//                            connectedNameStr + ":  " + readMessage,
+//                            Toast.LENGTH_LONG).show();//显示从哪个设备接收的什么样的字符串
+                    Toast.makeText(getApplicationContext(),"soda is going to boom!!", Toast.LENGTH_LONG).show();//显示从哪个设备接收的什么样的字符串
                     break;
                 case Constant.MSG_DEVICE_NAME:
                     // 获取已连接的设备名称，并弹出提示信息

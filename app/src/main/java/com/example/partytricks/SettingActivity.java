@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.partytricks.box2d.wavemakingmachine.MyBox2dActivity;
+import com.example.partytricks.box2d.software.MyBox2dActivity;
 
 public class SettingActivity extends AppCompatActivity {
 

@@ -2,6 +2,7 @@ package com.example.partytricks.box2d.util;
 
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
+import org.jbox2d.particle.ParticleColor;
 import org.jbox2d.particle.ParticleGroupDef;
 import org.jbox2d.particle.ParticleSystem;
 
@@ -9,7 +10,7 @@ import static com.example.partytricks.box2d.util.Constant.*;
 
 public class WaterObject
 {
-	public static void createWaterCycleObject//创建圆形的水
+	 public static void createWaterCycleObject//创建圆形的水
 	 (
 		 float x,
 		 float y,
@@ -17,7 +18,8 @@ public class WaterObject
 		 float strength, 
 		 int ptype,
 		 int gtype,
-		 ParticleSystem m_particleSystem
+		 ParticleSystem m_particleSystem,
+		 int color
 	 )
 	 {
 		 CircleShape shape = new CircleShape();//创建圆形
@@ -28,6 +30,7 @@ public class WaterObject
 		 pd.groupFlags=gtype;//设置粒子群的类型
 		 pd.strength=strength;//设置粒子的凝聚强度
 		 pd.shape =shape;//设置粒子群的形状
+		 pd.color=new ParticleColor((byte)color,(byte)color,(byte)color,(byte)color);
 		 m_particleSystem.m_groupList=m_particleSystem.createParticleGroup(pd);//创建粒子群对象
 	 }
 	 public static void createWaterRectObject//创建矩形的水
@@ -39,8 +42,8 @@ public class WaterObject
 		 float strength,
 		 int ptype,
 		 int gtype,
-		 ParticleSystem m_particleSystem
-
+		 ParticleSystem m_particleSystem,
+		 int color
 	 )
 	 {
 		 PolygonShape shape = new PolygonShape();//创建多边形
@@ -51,17 +54,7 @@ public class WaterObject
 		 pd.groupFlags=gtype;//设置粒子群的类型
 		 pd.strength=strength;//设置粒子的凝聚强度
 		 pd.shape =shape;//设置粒子群的形状
+		 pd.color=new ParticleColor((byte)color,(byte)color,(byte)color,(byte)color);
 		 m_particleSystem.m_groupList=m_particleSystem.createParticleGroup(pd);//创建粒子群对象
 	 }
-//	 public static void refresh(Vec2[] b2ps,GameView gv,Canvas canvas)//更新水精灵位置的方法
-//	 {
-//		 Paint paint=new Paint();
-//		 paint.setColor(Color.WHITE); 
-//		 for(Vec2 v2:b2ps)
-//		 {
-////			 canvas.drawPoint(v2.x*RATE, v2.y*RATE, paint);
-//			 canvas.drawBitmap(gv.activity.water, v2.x*RATE-5, v2.y*RATE-5, paint);
-//		 }
-//	 }
-	 
 }

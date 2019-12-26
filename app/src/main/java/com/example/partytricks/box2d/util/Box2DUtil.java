@@ -9,8 +9,8 @@ import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 
-import com.example.partytricks.box2d.wavemakingmachine.MyCircleColor;
-import com.example.partytricks.box2d.wavemakingmachine.MyPolygonColor;
+import com.example.partytricks.box2d.software.MyCircleColor;
+import com.example.partytricks.box2d.software.MyPolygonColor;
 
 import static com.example.partytricks.box2d.util.Constant.*;
 

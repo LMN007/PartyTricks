@@ -12,12 +12,15 @@ public class Constant {
 
     public static float accelerateX = 0.0f;
     public static float accelerateY = 10.0f;
-    private static SodaState sodaState = SodaState.SODA_OUT;
+    public static float velocityX = 0.0f;
+    public static float velocityY = 0.0f;
+
+    private static SodaState SODA_STATE = SodaState.SODA_OUT;
 
     public static synchronized void setSodaState(Constant.SodaState state){
-        sodaState = state;
+        SODA_STATE = state;
     }
-    public static Constant.SodaState getSodaState(){return sodaState;}
+    public static Constant.SodaState getSodaState(){return SODA_STATE;}
 
     public enum SodaState{
         SODA_ACCEPTING,

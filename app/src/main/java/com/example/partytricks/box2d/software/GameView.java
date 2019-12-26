@@ -67,7 +67,7 @@ implements SurfaceHolder.Callback  //实现生命周期回调接口
 			 {
 				 for(MyPoint v2:point)
 				 {
-					 canvas.drawBitmap(activity.waters[0], v2.x*RATE-10, v2.y*RATE-10, paint);//partical radias is 10
+					 canvas.drawBitmap(activity.waters[activity.watersIndex], v2.x*RATE-10, v2.y*RATE-10, paint);//partical radias is 10
 				 }
 				 isOver=true;
 			 }

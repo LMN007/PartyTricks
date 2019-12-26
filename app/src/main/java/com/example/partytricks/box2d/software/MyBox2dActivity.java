@@ -33,7 +33,8 @@ public class MyBox2dActivity extends Activity
     public ParticleSystem m_particleSystem;//声明流体粒子系统
     //物体列表
     ArrayList<MyBody> bl=new ArrayList<MyBody>();
-    public Bitmap[] waters=new Bitmap[1];
+    public Bitmap[] waters=new Bitmap[2];
+    public int watersIndex = 0;
     public Bitmap sodaBackground;
     public Bitmap waterMask;
    
@@ -140,6 +141,7 @@ public class MyBox2dActivity extends Activity
     public void initBitmap(Resources r)
     {
     	waters[0]=BitmapFactory.decodeResource(r, R.drawable.wp);//水0
+        waters[1]=BitmapFactory.decodeResource(r, R.drawable.wpu);//水1 unvisible
         sodaBackground = BitmapFactory.decodeResource(r,R.drawable.soda_background);
         waterMask = BitmapFactory.decodeResource(r,R.drawable.water_mask);
     }

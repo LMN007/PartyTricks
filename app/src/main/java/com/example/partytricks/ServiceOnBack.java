@@ -13,7 +13,6 @@ public class ServiceOnBack extends Application {
     private BluetoothSocket socket;
     private InputStream inputStream;
     private OutputStream outputStream;
-    private Constant.SodaState sodaState = Constant.SodaState.SODA_OUT;
 
     public void rmSocket(){
         try {
@@ -43,8 +42,4 @@ public class ServiceOnBack extends Application {
             Toast.makeText(getApplicationContext(), "there is no back connection", Toast.LENGTH_SHORT).show();
         }
     }
-    public synchronized void setSodaState(Constant.SodaState state){
-        this.sodaState = state;
-    }
-    public Constant.SodaState getSodaState(){return this.sodaState;}
 }

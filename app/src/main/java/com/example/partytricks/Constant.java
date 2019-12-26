@@ -10,6 +10,15 @@ public class Constant {
 
     public static final int REQUEST_CODE=1;//requestCode标识
 
+    public static float accelerateX = 0.0f;
+    public static float accelerateY = 10.0f;
+    private static SodaState sodaState = SodaState.SODA_OUT;
+
+    public static synchronized void setSodaState(Constant.SodaState state){
+        sodaState = state;
+    }
+    public static Constant.SodaState getSodaState(){return sodaState;}
+
     public enum SodaState{
         SODA_ACCEPTING,
         SODA_SENDING,

@@ -1,8 +1,11 @@
 package com.example.partytricks.box2d.thread;
 
 import static com.example.partytricks.box2d.util.Constant.*;
+import static com.example.partytricks.Constant.*;
 
 import com.example.partytricks.box2d.software.GameView;
+
+import org.jbox2d.common.Vec2;
 
 public class PhysicsThread extends Thread
 {
@@ -18,6 +21,7 @@ public class PhysicsThread extends Thread
 	{
 		while(DRAW_THREAD_FLAG)
 		{
+			gv.activity.world.setGravity(new Vec2(accelerateX,accelerateY));
 			gv.activity.world.step(TIME_STEP, ITERA,ITERA);//开始模拟
 			synchronized(gv.lock)//缓存水粒子的各个点
 			{

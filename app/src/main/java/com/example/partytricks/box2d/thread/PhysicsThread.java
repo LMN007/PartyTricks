@@ -60,42 +60,47 @@ public class PhysicsThread extends Thread
                     break;
                 case SODA_SENDING://might be 1s-2s
                     gv.activity.watersIndex=0;
-                    boolean endsending = true;
-                    //TODO
-                    particalVecBuff = gv.activity.m_particleSystem.getParticleVelocityBuffer();
-                    for(int i=0; i<particalVecBuff.length;i++){
-                        particalVecBuff[i] = new Vec2(0,-100);
-                    }
-                    particalPosBuff = gv.activity.m_particleSystem.getParticlePositionBuffer();
-                    for(int i=0;i<particalPosBuff.length;i++){
-                        if(particalPosBuff[i].y>50){
-                            endsending=false;
-                            break;
-                        }
-                    }
-                    if(endsending){
-                        Constant.setSodaState(SodaState.SODA_OUT);
-                    }
+//                    boolean endsending = true;
+//                    //TODO
+//                    particalVecBuff = gv.activity.m_particleSystem.getParticleVelocityBuffer();
+//                    for(int i=0; i<particalVecBuff.length;i++){
+//                        particalVecBuff[i] = new Vec2(0,-500);
+//                    }
+//                    particalPosBuff = gv.activity.m_particleSystem.getParticlePositionBuffer();
+//                    for(int i=0;i<particalPosBuff.length;i++){
+//                        if(particalPosBuff[i].y>50){
+//                            endsending=false;
+//                            break;
+//                        }
+//                        if(particalPosBuff[i].y<5){
+//                            particalPosBuff[i].y=5;
+//                        }
+//                    }
+//                    if(endsending){
+//                        Constant.setSodaState(SodaState.SODA_OUT);
+//                    }
+                    Constant.setSodaState(SodaState.SODA_OUT);
                     gv.activity.world.step(TIME_STEP, ITERA,ITERA);//开始模拟
                     break;
                 case SODA_ACCEPTING://might be 1s-2s
                     gv.activity.watersIndex=0;
-                    boolean endaccepting = true;
-                    //TODO
-                    particalVecBuff = gv.activity.m_particleSystem.getParticleVelocityBuffer();
-                    for(int i=0; i<particalVecBuff.length;i++){
-                        particalVecBuff[i] = new Vec2(0,100);
-                    }
-                    particalPosBuff = gv.activity.m_particleSystem.getParticlePositionBuffer();
-                    for(int i=0;i<particalPosBuff.length;i++){
-                        if(particalPosBuff[i].y<50){
-                            endaccepting=false;
-                            break;
-                        }
-                    }
-                    if(endaccepting){
-                        Constant.setSodaState(SodaState.SODA_IN);
-                    }
+//                    boolean endaccepting = true;
+//                    //TODO
+//                    particalVecBuff = gv.activity.m_particleSystem.getParticleVelocityBuffer();
+//                    for(int i=0; i<particalVecBuff.length;i++){
+//                        particalVecBuff[i] = new Vec2(0,100);
+//                    }
+//                    particalPosBuff = gv.activity.m_particleSystem.getParticlePositionBuffer();
+//                    for(int i=0;i<particalPosBuff.length;i++){
+//                        if(particalPosBuff[i].y<50){
+//                            endaccepting=false;
+//                            break;
+//                        }
+//                    }
+//                    if(endaccepting){
+//                        Constant.setSodaState(SodaState.SODA_IN);
+//                    }
+                    Constant.setSodaState(SodaState.SODA_IN);
                     gv.activity.world.step(TIME_STEP, ITERA,ITERA);//开始模拟
                     break;
                 default:

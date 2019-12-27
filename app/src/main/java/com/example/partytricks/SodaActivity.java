@@ -281,7 +281,7 @@ public class SodaActivity extends AppCompatActivity {
                 String message = sendMessage();
                 //send
                 ((ServiceOnBack)getApplication()).sendMessage(message.getBytes());
-                com.example.partytricks.Constant.setSodaState(com.example.partytricks.Constant.SodaState.SODA_OUT);
+                com.example.partytricks.Constant.setSodaState(com.example.partytricks.Constant.SodaState.SODA_SENDING);
                 flagKeyDown = false;
             }
 //            else{
@@ -381,8 +381,8 @@ public class SodaActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent){
             String responseString = intent.getStringExtra(SodaActivity.RESPONSE_STRING);
             if(responseString!=null){
+                com.example.partytricks.Constant.setSodaState(com.example.partytricks.Constant.SodaState.SODA_ACCEPTING);
                 receiveMessage(responseString);
-                com.example.partytricks.Constant.setSodaState(com.example.partytricks.Constant.SodaState.SODA_IN);
             }
         }
     }

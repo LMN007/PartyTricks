@@ -267,6 +267,7 @@ public class SodaActivity extends AppCompatActivity {
             }
             if(count > full){
                 //mImageView.setBackground(getResources().getDrawable(R.raw.dd));
+                com.example.partytricks.Constant.setSodaBreak(com.example.partytricks.Constant.SodaBreak.SODA_100);
                 com.example.partytricks.Constant.setSodaState(com.example.partytricks.Constant.SodaState.SODA_BREAK);
                 mMediaPlayer.stop();
                 flagFull = true;

@@ -39,5 +39,6 @@ public class Constant {
         SODA_0,
         SODA_40,
         SODA_80,
+        SODA_100,
     }
 }

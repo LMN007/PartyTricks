@@ -53,7 +53,7 @@ public class SodaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_soda);
-
+        Constant.setSodaState(Constant.SodaState.SODA_IN);
         IntentFilter filter = new IntentFilter(SodaReceiver.SODA_ACCEPT_RESPONSE);
         sodaReceiver = new SodaReceiver();
         registerReceiver(sodaReceiver,filter);
@@ -103,11 +103,13 @@ public class SodaActivity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             float[] value = event.values;
-//            tv1.setText("X轴加速度" + value[0]);
-//            tv2.setText("Y轴加速度" + value[1]);
-//            tv3.setText("Z轴加速度" + value[2]);
+            Constant.accelerateX = value[0];
+            Constant.accelerateY = value[1];
+            tv1.setText("X轴加速度" + value[0]);
+            tv2.setText("Y轴加速度" + value[1]);
+            tv3.setText("Z轴加速度" + value[2]);
             tv4.setText("count" + count);
-            if((value[1] > 8 || value[1] < -8) && !flagFull){
+            if((value[1] > 8 || value[1] < -8) && !flagFull && Constant.getSodaState() == Constant.SodaState.SODA_IN){
                 count ++;
                 current = count;
                 if(flagShake){
@@ -136,13 +138,14 @@ public class SodaActivity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             float[] value = event.values;
-            tv1.setText("X轴加速度" + value[0]);
-            tv2.setText("Y轴加速度" + value[1]);
-            tv3.setText("Z轴加速度" + value[2]);
-            if((value[1] < -9) && !flagFull && flagKeyDown){
+//            tv1.setText("X轴加速度" + value[0]);
+//            tv2.setText("Y轴加速度" + value[1]);
+//            tv3.setText("Z轴加速度" + value[2]);
+            if((value[1] < -5) && !flagFull && flagKeyDown && Constant.getSodaState() == Constant.SodaState.SODA_IN){
                 String message = sendMessage();
                 //send
                 ((ServiceOnBack)getApplication()).sendMessage(message.getBytes());
+                Constant.setSodaState(Constant.SodaState.SODA_OUT);
                 flagKeyDown = false;
             }
 //            else{
@@ -218,23 +221,16 @@ public class SodaActivity extends AppCompatActivity {
         AudioManager am = (AudioManager) getSystemService(Service.AUDIO_SERVICE);
         switch (keyCode) {
             case KeyEvent.KEYCODE_VOLUME_UP:
-                //am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_SAME, 0);
-                am.adjustStreamVolume(AudioManager.STREAM_DTMF, AudioManager.ADJUST_SAME, 0);
-//                bang.setText("Bang_up!");
                 flagKeyDown = true;
-                break;
+                return true;
             case KeyEvent.KEYCODE_VOLUME_DOWN:
-                //am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_SAME, 0);
-                am.adjustStreamVolume(AudioManager.STREAM_DTMF, AudioManager.ADJUST_SAME, 0);
-//                defense.setText("Defense!");
                 flagKeyDown = true;
-                break;
+                return true;
             default:
-                flagKeyDown = false;
                 break;
         }
-        return true;
-        //return super.onKeyDown(keyCode, event);
+        //return true;
+        return super.onKeyDown(keyCode, event);
     }
     public class SodaReceiver extends BroadcastReceiver{
         public static final String SODA_ACCEPT_RESPONSE = "action.PROCESS_RESPONSE";
@@ -243,6 +239,7 @@ public class SodaActivity extends AppCompatActivity {
             String responseString = intent.getStringExtra(SodaActivity.RESPONSE_STRING);
             if(responseString!=null){
                 receiveMessage(responseString);
+                Constant.setSodaState(Constant.SodaState.SODA_IN);
             }
         }
     }

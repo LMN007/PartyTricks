@@ -87,6 +87,9 @@ public class SodaActivity extends AppCompatActivity {
     public int watersIndex = 0;
     public Bitmap sodaBackground;
     public Bitmap waterMask;
+    public Bitmap break40;
+    public Bitmap break80;
+    public Bitmap break100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -386,6 +389,9 @@ public class SodaActivity extends AppCompatActivity {
         waters[1]=BitmapFactory.decodeResource(r, R.drawable.wpu);//水1 unvisible
         sodaBackground = BitmapFactory.decodeResource(r,R.drawable.soda_background);
         waterMask = BitmapFactory.decodeResource(r,R.drawable.water_mask);
+        break40 = BitmapFactory.decodeResource(r,R.drawable.break40);
+        break80 = BitmapFactory.decodeResource(r,R.drawable.break80);
+        break100 = BitmapFactory.decodeResource(r,R.drawable.break100);
     }
     public class SodaReceiver extends BroadcastReceiver{
         public static final String SODA_ACCEPT_RESPONSE = "action.PROCESS_RESPONSE";

@@ -13,6 +13,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import static com.example.partytricks.Constant.*;
 import static com.example.partytricks.box2d.util.Constant.*;
 
 public class GameView extends SurfaceView  
@@ -73,9 +75,39 @@ implements SurfaceHolder.Callback  //实现生命周期回调接口
 				 isOver=true;
 			 }
 		}
-        canvas.drawBitmap(activity.waterMask,
-                new Rect(0,0,activity.waterMask.getWidth(),activity.waterMask.getHeight()),
-                new Rect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT),paint);
+		switch(SODA_BREAK){
+			case SODA_0:
+				canvas.drawBitmap(activity.waterMask,
+						new Rect(0,0,activity.waterMask.getWidth(),activity.waterMask.getHeight()),
+						new Rect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT),paint);
+				break;
+			case SODA_40:
+				canvas.drawBitmap(activity.waterMask,
+						new Rect(0,0,activity.waterMask.getWidth(),activity.waterMask.getHeight()),
+						new Rect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT),paint);
+				canvas.drawBitmap(activity.break40,
+						new Rect(0,0,activity.break40.getWidth(),activity.break40.getHeight()),
+						new Rect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT),paint);
+				break;
+			case SODA_80:
+				canvas.drawBitmap(activity.waterMask,
+						new Rect(0,0,activity.waterMask.getWidth(),activity.waterMask.getHeight()),
+						new Rect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT),paint);
+				canvas.drawBitmap(activity.break80,
+						new Rect(0,0,activity.break80.getWidth(),activity.break80.getHeight()),
+						new Rect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT),paint);
+				break;
+			case SODA_100:
+				canvas.drawBitmap(activity.break100,
+						new Rect(0,0,activity.break100.getWidth(),activity.break100.getHeight()),
+						new Rect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT),paint);
+				break;
+			default:
+				canvas.drawBitmap(activity.waterMask,
+						new Rect(0,0,activity.waterMask.getWidth(),activity.waterMask.getHeight()),
+						new Rect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT),paint);
+				break;
+		}
 	}
 
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) 

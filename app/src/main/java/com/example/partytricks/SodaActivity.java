@@ -90,6 +90,7 @@ public class SodaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        com.example.partytricks.Constant.setSodaBreak(com.example.partytricks.Constant.SodaBreak.SODA_0);
         com.example.partytricks.Constant.setSodaState(com.example.partytricks.Constant.SodaState.SODA_IN);
         IntentFilter filter = new IntentFilter(SodaReceiver.SODA_ACCEPT_RESPONSE);
         sodaReceiver = new SodaReceiver();
@@ -258,6 +259,12 @@ public class SodaActivity extends AppCompatActivity {
                 vibrator.cancel();
                 flagShake = true;
             }
+            if(count > 0.4*full && count < 0.8*full){
+                com.example.partytricks.Constant.setSodaBreak(com.example.partytricks.Constant.SodaBreak.SODA_40);
+            }
+            if(count > 0.8*full && count < full){
+                com.example.partytricks.Constant.setSodaBreak(com.example.partytricks.Constant.SodaBreak.SODA_80);
+            }
             if(count > full){
                 //mImageView.setBackground(getResources().getDrawable(R.raw.dd));
                 com.example.partytricks.Constant.setSodaState(com.example.partytricks.Constant.SodaState.SODA_BREAK);
@@ -357,10 +364,14 @@ public class SodaActivity extends AppCompatActivity {
         AudioManager am = (AudioManager) getSystemService(Service.AUDIO_SERVICE);
         switch (keyCode) {
             case KeyEvent.KEYCODE_VOLUME_UP:
-                flagKeyDown = true;
+                if(!(((ServiceOnBack)getApplication()).getSocket()==null)){
+                    flagKeyDown = true;
+                }
                 return true;
             case KeyEvent.KEYCODE_VOLUME_DOWN:
-                flagKeyDown = true;
+                if(!(((ServiceOnBack)getApplication()).getSocket()==null)) {
+                    flagKeyDown = true;
+                }
                 return true;
             default:
                 break;

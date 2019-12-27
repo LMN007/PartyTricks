@@ -14,11 +14,18 @@ public class Constant {
     public static float accelerateY = 10.0f;
 
     private static SodaState SODA_STATE = SodaState.SODA_IN;
+    private static SodaBreak SODA_BREAK = SodaBreak.SODA_0;
+
 
     public static synchronized void setSodaState(Constant.SodaState state){
         SODA_STATE = state;
     }
+    public static synchronized void setSodaBreak(Constant.SodaBreak state){
+        SODA_BREAK = state;
+    }
+
     public static Constant.SodaState getSodaState(){return SODA_STATE;}
+    public static Constant.SodaBreak getSodaBreak(){return SODA_BREAK;}
 
     public enum SodaState{
         SODA_ACCEPTING,
@@ -26,5 +33,11 @@ public class Constant {
         SODA_IN,
         SODA_OUT,
         SODA_BREAK,
+    }
+
+    public enum SodaBreak{
+        SODA_0,
+        SODA_40,
+        SODA_80,
     }
 }

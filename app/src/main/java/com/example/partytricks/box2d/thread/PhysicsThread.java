@@ -29,7 +29,7 @@ public class PhysicsThread extends Thread
 		{
             Vec2[] particalVecBuff;
             Vec2[] particalPosBuff;
-            gv.activity.world.setGravity(new Vec2(accelerateX,accelerateY));
+            gv.activity.world.setGravity(new Vec2(accelerateX,accelerateY+10));
 
 		    switch(getSodaState()){
                 case SODA_IN:
@@ -43,8 +43,8 @@ public class PhysicsThread extends Thread
                         if(Math.abs(vec.x+accelerateX*5)<100){
                             vx=vec.x+(-accelerateX*6);
                         }
-                        if(Math.abs(vec.y+(accelerateY+10)*5)<100){
-                            vy=vec.y+(accelerateY+10)*5;
+                        if(Math.abs(vec.y+(accelerateY)*5)<100){
+                            vy=vec.y+(accelerateY)*5;
                         }
                         particalVecBuff[i] = new Vec2(vx,vy);
                     }

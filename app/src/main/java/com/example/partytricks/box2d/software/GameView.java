@@ -3,6 +3,7 @@ package com.example.partytricks.box2d.software;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.particle.ParticleColor;
 
+import com.example.partytricks.SodaActivity;
 import com.example.partytricks.box2d.thread.DrawThread;
 import com.example.partytricks.box2d.thread.PhysicsThread;
 
@@ -17,7 +18,7 @@ import static com.example.partytricks.box2d.util.Constant.*;
 public class GameView extends SurfaceView  
 implements SurfaceHolder.Callback  //实现生命周期回调接口
 {
-	public MyBox2dActivity activity;
+	public SodaActivity activity;
 	public Object lock=new Object();//锁
 	Paint paint;//画笔		
 	DrawThread dt;//绘制线程
@@ -26,7 +27,7 @@ implements SurfaceHolder.Callback  //实现生命周期回调接口
 	public MyPoint[] point=new MyPoint[1];//存放各个水粒子的位置--绘制
 	public boolean isOver=true;//水粒子是否绘制完的标志
 	
-	public GameView(MyBox2dActivity activity) 
+	public GameView(SodaActivity activity)
 	{
 		super(activity);
 		this.activity = activity;		

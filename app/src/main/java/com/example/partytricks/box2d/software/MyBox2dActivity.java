@@ -135,8 +135,8 @@ public class MyBox2dActivity extends Activity
 
         WaterObject.createWaterRectObject((380+x)*ratio,(680+y)*ratio,500*ratio,500*ratio,2,ParticleType.b2_waterParticle,ParticleGroupType.b2_solidParticleGroup,m_particleSystem,0);//创建具有水属性的流体
         
-        GameView gv= new GameView(this);   
-        setContentView(gv);   
+//        GameView gv= new GameView(this);
+//        setContentView(gv);
     } 
     public void initBitmap(Resources r)
     {

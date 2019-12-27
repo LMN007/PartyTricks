@@ -10,7 +10,7 @@ import java.io.OutputStream;
 
 
 public class ServiceOnBack extends Application {
-    private BluetoothSocket socket;
+    private BluetoothSocket socket=null;
     private InputStream inputStream;
     private OutputStream outputStream;
 

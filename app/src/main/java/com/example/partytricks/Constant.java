@@ -13,7 +13,7 @@ public class Constant {
     public static float accelerateX = 0.0f;
     public static float accelerateY = 10.0f;
 
-    private static SodaState SODA_STATE = SodaState.SODA_OUT;
+    private static SodaState SODA_STATE = SodaState.SODA_IN;
 
     public static synchronized void setSodaState(Constant.SodaState state){
         SODA_STATE = state;

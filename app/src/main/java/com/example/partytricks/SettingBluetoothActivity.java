@@ -21,7 +21,8 @@ import java.io.Serializable;
 
 public class SettingBluetoothActivity extends Activity{
     private BluetoothAdapter btAdapter = null;// 本地蓝牙适配器
-    private MyService myService = null;// Service引用
+    private MyService myAcceptService = null;// Service引用
+    private MyService mySendService = null;// Service引用
     private Button sendBtn,getDeviceBtn;
     private String connectedNameStr = null;// 已连接的设备名称
     @Override
@@ -39,7 +40,7 @@ public class SettingBluetoothActivity extends Activity{
             Toast.makeText(this, "请先开启蓝牙！", Toast.LENGTH_LONG).show();
             finish();
         }else{//否则初始化聊天控件
-            if(myService==null){
+            if(myAcceptService==null){
                 initChat();
             }
         }
@@ -47,10 +48,15 @@ public class SettingBluetoothActivity extends Activity{
     @Override
     public synchronized void onResume() {
         super.onResume();
-        if (myService == null) {// 创建并开启Service
+        if (myAcceptService != null) {// 创建并开启Service
             // 如果Service为空状态
-            if (myService.getState() == MyService.STATE_NONE) {
-                myService.start();// 开启Service
+            if (myAcceptService.getState() == MyService.STATE_NONE) {
+                myAcceptService.start();// 开启Service
+                Toast.makeText(this, "accept service start", Toast.LENGTH_SHORT).show();
+            }
+            if (mySendService.getState() == MyService.STATE_NONE) {
+                mySendService.start();// 开启Service
+//                Toast.makeText(this, "send service start", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -61,9 +67,9 @@ public class SettingBluetoothActivity extends Activity{
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (myService != null) {// 停止Service
-            ((ServiceOnBack)getApplication()).setSocket(myService.getSocket());
-//            myService.stop();
+        if (myAcceptService != null) {// 停止Service
+            ((ServiceOnBack)getApplication()).setSocket(mySendService.getSocket());
+//            myAcceptService.stop();
         }
     }
     private void initChat(){
@@ -83,17 +89,18 @@ public class SettingBluetoothActivity extends Activity{
                 startActivityForResult(serverIntent, Constant.REQUEST_CODE);
             }
         });
-        myService = new MyService(this, mHandler);// 创建Service对象
+        myAcceptService = new MyService(this, mHandler,MyService.ConnType.ACCEPT);// 创建Service对象
+        mySendService = new MyService(this,mHandler,MyService.ConnType.SEND);
     }
     private void sendMessage(String msg){
         // 先检查是否已经连接到设备
-        if (myService.getState() != MyService.STATE_CONNECTED) {
+        if (mySendService.getState() != MyService.STATE_CONNECTED) {
             Toast.makeText(this, "未连接到设备！", Toast.LENGTH_SHORT).show();
             return;
         }
         if(msg.length()>0){//设备已经连接
             byte[] send = msg.getBytes();// 获取发送消息的字节数组
-            myService.write(send);//发送
+            mySendService.write(send);//发送
         }
     }
     public class MyHandler extends Handler implements Serializable{
@@ -140,7 +147,7 @@ public class SettingBluetoothActivity extends Activity{
                             MyDeviceListActivity.EXTRA_DEVICE_ADDR);
                     // 获取BluetoothDevice对象,根据给出的address
                     BluetoothDevice device = btAdapter.getRemoteDevice(address);
-                    myService.connect(device);// 连接该设备
+                    mySendService.connect(device);// 连接该设备
                 }
                 break;
         }

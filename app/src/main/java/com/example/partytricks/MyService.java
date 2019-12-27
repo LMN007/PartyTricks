@@ -17,9 +17,15 @@ import android.os.Message;
 
 public class MyService implements Serializable{
     private static final long serialVersionUID = 5459584623637090823L;
+    public enum ConnType{
+        SEND,
+        ACCEPT,
+    }
     // 本应用的唯一 UUID,全局唯一标识
     private static final UUID MY_UUID = UUID.
             fromString("db764ac8-4b08-7f25-aafe-59d03c27bae3");
+    //设定本蓝牙连接类型
+    private ConnType connType;
     // 成员变量
     private final BluetoothAdapter btAdapter;
     private final Handler myHandler;
@@ -35,10 +41,11 @@ public class MyService implements Serializable{
     public static final int STATE_CONNECTING = 2; // 正在连接
     public static final int STATE_CONNECTED = 3;  // 已连接到设备
     // 构造器
-    public MyService(Context context, Handler handler) {
+    public MyService(Context context, Handler handler,ConnType type) {
         btAdapter = BluetoothAdapter.getDefaultAdapter();
         myState = STATE_NONE;
         myHandler = handler;
+        this.connType = type;
     }
     //设置当前连接状态的方法
     private synchronized void setState(int state) {
@@ -57,7 +64,7 @@ public class MyService implements Serializable{
             myConnectThread.cancel(); myConnectThread = null;}
         if (myConnectedThread != null) {
             myConnectedThread.cancel(); myConnectedThread = null;}
-        if (myAcceptThread == null) {// 开启线程监听连接
+        if (myAcceptThread == null&&this.connType==ConnType.ACCEPT) {// 开启线程监听连接(修改指定为accept类型才开启)
             myAcceptThread = new AcceptThread();
             myAcceptThread.start();
         }
@@ -65,6 +72,7 @@ public class MyService implements Serializable{
     }
     //连接设备的方法
     public synchronized void connect(BluetoothDevice device) {
+        if(this.connType == ConnType.ACCEPT) return;//只有指定为send类型才可以连接
         // 关闭不必要的线程
         if (myState == STATE_CONNECTING) {
             if (myConnectThread != null) {

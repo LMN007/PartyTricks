@@ -56,13 +56,5 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Button debugBt = (Button)findViewById(R.id.debugButton);
-        debugBt.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(SettingActivity.this,MyBox2dActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

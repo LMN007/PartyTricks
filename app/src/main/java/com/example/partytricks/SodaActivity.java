@@ -68,14 +68,14 @@ public class SodaActivity extends AppCompatActivity {
     private Button btn_return;
     private ImageView mImageView;
     private TextView tv1, tv2, tv3, tv4;
-    private SoundPool soundPool;
+    private SoundPool soundPool, soundPool2;
     private MediaPlayer mMediaPlayer;
-    private HashMap<Integer, Integer> soundPoolMap;
+    private HashMap<Integer, Integer> soundPoolMap, soundPoolMapBreak;
     private int count = 0;
     private int full;
     private int current = 0;
     private boolean flagFull = false;
-    private boolean flagPass = false;//test git
+    private boolean flagBreak = false;//test git
     private boolean flagShake = false;
     private boolean flagKeyDown = false;
 
@@ -220,8 +220,11 @@ public class SodaActivity extends AppCompatActivity {
     }
     public void initSounds(){
         soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 100);
+        soundPool2 = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
         soundPoolMap = new HashMap<Integer, Integer>();
+        soundPoolMapBreak = new HashMap<Integer, Integer>();
         soundPoolMap.put(1,soundPool.load(this, R.raw.soda,1));
+        soundPoolMapBreak.put(1,soundPool2.load(this,R.raw.bg,1));
 //        soundPoolMap.put(2,soundPool.load(this, R.raw.soda,2));
 //        soundPoolMap.put(3,soundPool.load(this, R.raw.soda,3));
         mMediaPlayer = MediaPlayer.create(this, R.raw.background_soda);
@@ -233,6 +236,14 @@ public class SodaActivity extends AppCompatActivity {
         float streamVolumeMax = amgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         float volume = streamVolumeCurrent/streamVolumeMax;
         soundPool.play(soundPoolMap.get(sound), volume, volume, 1, loop, 1f);
+    }
+
+    public void playSoundBreak(int sound, int loop){
+        amgr = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
+        float streamVolumeCurrent = amgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+        float streamVolumeMax = amgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        float volume = streamVolumeCurrent/streamVolumeMax;
+        soundPool2.play(soundPoolMap.get(sound), volume, volume, 1, loop, 1f);
     }
 
     private SensorEventListener mySel = new SensorEventListener() {
@@ -249,6 +260,7 @@ public class SodaActivity extends AppCompatActivity {
                 count ++;
                 current = count;
                 if(flagShake){
+
                     playSound(1,0);
                     vibrator.vibrate(new long[]{0,0,10,5000}, -1);
                     flagShake = false;
@@ -265,12 +277,16 @@ public class SodaActivity extends AppCompatActivity {
             if(count > 0.8*full && count < full){
                 com.example.partytricks.Constant.setSodaBreak(com.example.partytricks.Constant.SodaBreak.SODA_80);
             }
-            if(count > full){
+            if(count >= full){
                 //mImageView.setBackground(getResources().getDrawable(R.raw.dd));
                 com.example.partytricks.Constant.setSodaBreak(com.example.partytricks.Constant.SodaBreak.SODA_100);
                 com.example.partytricks.Constant.setSodaState(com.example.partytricks.Constant.SodaState.SODA_BREAK);
                 mMediaPlayer.stop();
                 flagFull = true;
+                if(!flagBreak){
+                    playSoundBreak(1,0);
+                    flagBreak = true;
+                }
             }
         }
 

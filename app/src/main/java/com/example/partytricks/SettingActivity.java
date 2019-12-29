@@ -5,16 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.partytricks.box2d.software.MyBox2dActivity;
 
 public class SettingActivity extends AppCompatActivity {
 
     private Button mBtn_connect;
-    private Button mBtn_game1;
-    private Button mBtn_game2;
-    private Button mBtn_game3;
-    private Button mBtn_return;
+    private ImageButton mBtn_game1;
+    private ImageButton mBtn_game2;
+    private ImageButton mBtn_game3;
+    private ImageButton mBtn_return;
+//    private Button mBtn_game1
+//    private Button mBtn_game2;
+//    private Button mBtn_game3;
+//    private Button mBtn_return;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

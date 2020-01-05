@@ -120,10 +120,13 @@ public class SettingBluetoothActivity extends Activity{
                         broadcastIntent.setAction(SodaActivity.SodaReceiver.SODA_ACCEPT_RESPONSE);
                         broadcastIntent.putExtra(SodaActivity.RESPONSE_STRING,readMessage);
                         sendBroadcast(broadcastIntent);
+                        Toast.makeText(getApplicationContext(),
+                                "Soda is Booming ^_^",
+                                Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(getApplicationContext(),
                                 connectedNameStr + ":  " + readMessage,
-                                Toast.LENGTH_LONG).show();//TODO 不显示从哪个设备接收的什么样的字符串
+                                Toast.LENGTH_LONG).show();
                     }
                     break;
                 case Constant.MSG_DEVICE_NAME:

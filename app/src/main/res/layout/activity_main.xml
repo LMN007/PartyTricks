@@ -38,7 +38,10 @@
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginTop="125dp"
-        android:text="@string/button_start" />
+        android:text="@string/button_start"
+        android:textColor="@android:color/background_dark"
+        android:textFontWeight="@android:integer/config_longAnimTime"
+        android:background="@drawable/button_bg1"/>
 
     <Button style="@style/Widget.AppCompat.Button.Colored"
         android:theme="@style/PrimaryFlatButton"
@@ -47,6 +50,9 @@
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Link"/>
+        android:text="Link"
+        android:textColor="@android:color/background_dark"
+        android:textFontWeight="@android:integer/config_longAnimTime"
+        android:background="@drawable/button_bg1"/>
 
 </LinearLayout>

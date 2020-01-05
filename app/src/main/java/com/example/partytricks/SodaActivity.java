@@ -68,9 +68,9 @@ public class SodaActivity extends AppCompatActivity {
     private Button btn_return;
     private ImageView mImageView;
     private TextView tv1, tv2, tv3, tv4;
-    private SoundPool soundPool, soundPool2;
+    private SoundPool soundPool, soundPool2, soundPool3;
     private MediaPlayer mMediaPlayer;
-    private HashMap<Integer, Integer> soundPoolMap, soundPoolMapBreak;
+    private HashMap<Integer, Integer> soundPoolMap, soundPoolMapBreak, soundPoolMapSmallBreak;
     private int count = 0;
     private int full;
     private int current = 0;
@@ -78,6 +78,7 @@ public class SodaActivity extends AppCompatActivity {
     private boolean flagBreak = false;//test git
     private boolean flagShake = false;
     private boolean flagKeyDown = false;
+    private boolean flag4 = false, flag8 = false;
 
     public World world;
     public ParticleSystem m_particleSystem;//声明流体粒子系统
@@ -90,6 +91,7 @@ public class SodaActivity extends AppCompatActivity {
     public Bitmap break40;
     public Bitmap break80;
     public Bitmap break100;
+    public Bitmap gameOver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -224,12 +226,13 @@ public class SodaActivity extends AppCompatActivity {
     public void initSounds(){
         soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 100);
         soundPool2 = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
+        soundPool3 = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
         soundPoolMap = new HashMap<Integer, Integer>();
         soundPoolMapBreak = new HashMap<Integer, Integer>();
+        soundPoolMapSmallBreak = new HashMap<Integer, Integer>();
         soundPoolMap.put(1,soundPool.load(this, R.raw.soda,1));
         soundPoolMapBreak.put(1,soundPool2.load(this,R.raw.bg,1));
-//        soundPoolMap.put(2,soundPool.load(this, R.raw.soda,2));
-//        soundPoolMap.put(3,soundPool.load(this, R.raw.soda,3));
+        soundPoolMapSmallBreak.put(1,soundPool3.load(this,R.raw.bgs,1));
         mMediaPlayer = MediaPlayer.create(this, R.raw.background_soda);
     }
 
@@ -247,6 +250,14 @@ public class SodaActivity extends AppCompatActivity {
         float streamVolumeMax = amgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         float volume = streamVolumeCurrent/streamVolumeMax;
         soundPool2.play(soundPoolMap.get(sound), volume, volume, 1, loop, 1f);
+    }
+
+    public void playSoundSmallBreak(int sound, int loop){
+        amgr = (AudioManager)this.getSystemService(Context.AUDIO_SERVICE);
+        float streamVolumeCurrent = amgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+        float streamVolumeMax = amgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        float volume = streamVolumeCurrent/streamVolumeMax;
+        soundPool3.play(soundPoolMap.get(sound), volume, volume, 1, loop, 1f);
     }
 
     private SensorEventListener mySel = new SensorEventListener() {
@@ -276,9 +287,17 @@ public class SodaActivity extends AppCompatActivity {
             }
             if(count > 0.4*full && count < 0.8*full){
                 com.example.partytricks.Constant.setSodaBreak(com.example.partytricks.Constant.SodaBreak.SODA_40);
+                if(!flag4){
+                    playSoundSmallBreak(1,0);
+                    flag4 = true;
+                }
             }
             if(count > 0.8*full && count < full){
                 com.example.partytricks.Constant.setSodaBreak(com.example.partytricks.Constant.SodaBreak.SODA_80);
+                if(!flag8){
+                    playSoundSmallBreak(1,0);
+                    flag8 = true;
+                }
             }
             if(count >= full){
                 //mImageView.setBackground(getResources().getDrawable(R.raw.dd));
@@ -408,6 +427,7 @@ public class SodaActivity extends AppCompatActivity {
         break40 = BitmapFactory.decodeResource(r,R.drawable.break40);
         break80 = BitmapFactory.decodeResource(r,R.drawable.break80);
         break100 = BitmapFactory.decodeResource(r,R.drawable.break100);
+        gameOver = BitmapFactory.decodeResource(r,R.drawable.gameover);
     }
     public class SodaReceiver extends BroadcastReceiver{
         public static final String SODA_ACCEPT_RESPONSE = "action.PROCESS_RESPONSE";

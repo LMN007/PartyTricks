@@ -101,6 +101,9 @@ implements SurfaceHolder.Callback  //实现生命周期回调接口
 				canvas.drawBitmap(activity.break100,
 						new Rect(0,0,activity.break100.getWidth(),activity.break100.getHeight()),
 						new Rect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT),paint);
+				canvas.drawBitmap(activity.gameOver,
+						new Rect(0,0,activity.gameOver.getWidth(),activity.gameOver.getHeight()),
+						new Rect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT),paint);
 				break;
 			default:
 				canvas.drawBitmap(activity.waterMask,

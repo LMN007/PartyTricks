@@ -1,6 +1,8 @@
 package com.example.partytricks;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +13,7 @@ import com.example.partytricks.box2d.software.MyBox2dActivity;
 
 public class SettingActivity extends AppCompatActivity {
 
-    private Button mBtn_connect;
+    private Button mBtn_test_link;
     private ImageButton mBtn_game1;
     private ImageButton mBtn_game2;
     private ImageButton mBtn_game3;
@@ -24,6 +26,14 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        mBtn_test_link = findViewById(R.id.btn00);
+        mBtn_test_link.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String msg="<DATA STRUCTURE>";
+                ((ServiceOnBack)getApplication()).sendMessage(msg.getBytes());
+            }
+        });
         mBtn_game1 = findViewById(R.id.btn01);
         mBtn_game1.setOnClickListener(new View.OnClickListener(){
             @Override

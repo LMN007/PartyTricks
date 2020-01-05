@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.regex.Pattern;
 
 public class SettingBluetoothActivity extends Activity{
     private BluetoothAdapter btAdapter = null;// 本地蓝牙适配器
@@ -112,15 +113,21 @@ public class SettingBluetoothActivity extends Activity{
                     byte[] readBuf = (byte[]) msg.obj;
                     // 创建接收的信息的字符串
                     String readMessage = new String(readBuf, 0, msg.arg1);//用系统默认的字符集把字节数组的一个序列转换为字符串
-                    //send Broadcast
-                    Intent broadcastIntent = new Intent();
-                    broadcastIntent.setAction(SodaActivity.SodaReceiver.SODA_ACCEPT_RESPONSE);
-                    broadcastIntent.putExtra(SodaActivity.RESPONSE_STRING,readMessage);
-                    sendBroadcast(broadcastIntent);
-
-                    Toast.makeText(getApplicationContext(),
-                            connectedNameStr + ":  " + readMessage,
-                            Toast.LENGTH_LONG).show();//TODO 不显示从哪个设备接收的什么样的字符串
+                    String reg = "^[0-9]*/[0-9]*";
+                    if(Pattern.compile(reg).matcher(readMessage).find()){
+                        //send Broadcast
+                        Intent broadcastIntent = new Intent();
+                        broadcastIntent.setAction(SodaActivity.SodaReceiver.SODA_ACCEPT_RESPONSE);
+                        broadcastIntent.putExtra(SodaActivity.RESPONSE_STRING,readMessage);
+                        sendBroadcast(broadcastIntent);
+                        Toast.makeText(getApplicationContext(),
+                                "Soda is Booming ^_^",
+                                Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(),
+                                connectedNameStr + ":  " + readMessage,
+                                Toast.LENGTH_LONG).show();
+                    }
                     break;
                 case Constant.MSG_DEVICE_NAME:
                     // 获取已连接的设备名称，并弹出提示信息

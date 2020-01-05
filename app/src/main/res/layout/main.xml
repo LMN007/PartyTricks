@@ -5,17 +5,17 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <Button
+    <Button style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/btn_getDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="获取发送设备"
+        android:text="Get devices"
         android:layout_gravity="center" />
 
-    <Button
+    <Button style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/btn_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="发送"
+        android:text="Send"
         android:layout_gravity="center" />
 </LinearLayout>

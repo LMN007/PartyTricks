@@ -13,10 +13,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
-        android:layout_width="150dp"
+        android:layout_width="290dp"
         android:layout_height="60dp"
         android:layout_marginRight="5dp"
-        android:text="Link to device"/>
+        android:text="Test Link to device"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -90,6 +90,7 @@ public class SodaActivity extends AppCompatActivity {
     public Bitmap break40;
     public Bitmap break80;
     public Bitmap break100;
+    public Bitmap gameOver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -408,6 +409,7 @@ public class SodaActivity extends AppCompatActivity {
         break40 = BitmapFactory.decodeResource(r,R.drawable.break40);
         break80 = BitmapFactory.decodeResource(r,R.drawable.break80);
         break100 = BitmapFactory.decodeResource(r,R.drawable.break100);
+        gameOver = BitmapFactory.decodeResource(r,R.drawable.gameover);
     }
     public class SodaReceiver extends BroadcastReceiver{
         public static final String SODA_ACCEPT_RESPONSE = "action.PROCESS_RESPONSE";

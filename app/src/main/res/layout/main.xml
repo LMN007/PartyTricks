@@ -9,13 +9,13 @@
         android:id="@+id/btn_getDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="获取发送设备"
+        android:text="获取发送设备列表"
         android:layout_gravity="center" />
 
     <Button
         android:id="@+id/btn_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="发送"
+        android:text="测试连接"
         android:layout_gravity="center" />
 </LinearLayout>
